@@ -22,4 +22,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('', include('contests.urls')),
     path('', include('editions.urls')),
+    path('', include('entries.urls')),
+    path('', include('votes.urls')),
 ]

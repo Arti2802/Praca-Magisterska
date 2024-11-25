@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'contests',
     'editions',
+    'entries',
+    'users',
+    'votes',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +74,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+
+AUTH_USER_MODEL = "users.User"
 
 
 # Database

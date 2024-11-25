@@ -16,3 +16,12 @@ class ContestDetail(generics.RetrieveUpdateDestroyAPIView):
     name = "edition-detail"
     serializer_class = ContestSerializer
     queryset = Contest.objects.all()
+
+
+# class UsersContests(generics.ListCreateAPIView):
+#     name = "users-contests"
+#     serializer_class = ContestSerializer
+#
+#     def get_queryset(self):
+#         pk = self.kwargs.get('pk')
+#         return Contest.objects.filter(user=pk)
