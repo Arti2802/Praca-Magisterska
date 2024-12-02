@@ -6,6 +6,12 @@ from .models import Entry
 # Create your views here.
 
 
+class EntriesList(generics.ListCreateAPIView):
+    name = "entries"
+    serializer_class = EntrySerializer
+    queryset = Entry.objects.all()
+
+
 class EntryDetail(generics.RetrieveUpdateDestroyAPIView):
     name = "entry-detail"
     serializer_class = EntrySerializer
