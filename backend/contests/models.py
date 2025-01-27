@@ -6,7 +6,7 @@ from users.models import User
 
 class Contest(models.Model):
     name = models.CharField(max_length=255)
-    logo = models.ImageField()
+    logo = models.ImageField(blank=True)
 
 
 class UserInContest(models.Model):
