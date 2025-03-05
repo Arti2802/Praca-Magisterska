@@ -1,15 +1,26 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import Country, CountryInEdition
 from .serializers import CountrySerializer
+from django_countries import countries
 
 # Create your views here.
 
 
-class CountriesList(generics.ListCreateAPIView):
+class CountriesList(APIView):
     name = "countries"
-    serializer_class = CountrySerializer
-    queryset = Country.objects.all()
+
+    def get(self, request):
+        countries_data = CountrySerializer.get_countries()
+        return Response(countries_data)
+
+
+# class CountriesList(generics.ListCreateAPIView):
+#     name = "countries"
+#     serializer_class = CountrySerializer
+#     queryset = countries.objects.all()
 
 
 class CountryDetail(generics.RetrieveUpdateDestroyAPIView):

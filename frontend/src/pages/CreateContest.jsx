@@ -51,7 +51,7 @@ export const CreateContest = () => {
                     <label htmlFor="logo">Logo</label>
                     <input type="file" name="logo" onChange={handleChange}/><br/>
                     <button type="submit">Zatwierdź</button>
-                </form>
+            </form>
         </>
     );
 }
