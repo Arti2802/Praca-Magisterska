@@ -2,11 +2,12 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ApiURL from "../ApiURL";
+import { ConfirmButton } from "../components/ConfirmButton";
 
 export const SendSong = () => {
-    //const { id } = useParams();
+    const { id, id2 } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({});
 
@@ -24,17 +25,17 @@ export const SendSong = () => {
                 'Youtube_URL': data.yt,
                 'Spotify_URL': data.spotify,
                 'ts': data.ts,
-                'artist': 'artysta',
-                'title': 'tytuł',
+                'artist': data.artist,
+                'title': data.title,
                 'user': 1,
-                'edition': 1
+                'edition': id2
             }
 
             const response = await axios.post(`${ApiURL}/entries/`, fullData);
             console.log(response);
             if (response.status === 201)
             {
-                navigate('/');
+                navigate(`/${id}`);
             }
         } catch (err) {
             console.log(err);
@@ -54,6 +55,14 @@ export const SendSong = () => {
             <h1>Zgłoś utwór</h1>
             <form className="col-3 mx-2 group" onSubmit={handleSend}>
                 <div className="mb-3">
+                    <label className="form-label" htmlFor="yt">Artysta</label>
+                    <input className="form-control" placeholder="Artysta" name="artist" onChange={handleChange}/>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="yt">Tytuł</label>
+                    <input className="form-control" placeholder="Tytuł" name="title" onChange={handleChange}/>
+                </div>
+                <div className="mb-3">
                     <label className="form-label" htmlFor="yt">Link YT</label>
                     <input className="form-control" placeholder="Link YT" name="yt" onChange={handleChange}/>
                 </div>
@@ -65,7 +74,7 @@ export const SendSong = () => {
                     <label className="form-label" htmlFor="ts">Fragment z YT (TS)</label>
                     <input className="form-control" placeholder="0:00" name="ts" onChange={handleChange}/>
                 </div>
-                <button className="btn btn-success" type="submit">Zatwierdź</button>
+                <ConfirmButton label="Zatwierdź"/>
             </form>
         </>
     );

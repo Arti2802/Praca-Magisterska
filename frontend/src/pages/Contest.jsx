@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ApiURL from "../ApiURL";
@@ -8,7 +8,8 @@ import { LinkButton } from "../components/LinkButton";
 export const Contest = () => {
     const { id } = useParams();
     const [contest, setContest] = useState({});
-    const [editions, setEditions] = useState([]);
+    const [editionsActual, setEditionsActual] = useState([]);
+    const [editionsOld, setEditionsOld] = useState([]);
 
     useEffect(() => {
         axios.get(`${ApiURL}/contests/${id}/`)
@@ -22,11 +23,18 @@ export const Contest = () => {
     }, [id])
 
     useEffect(() => {
-        axios.get(`${ApiURL}/contests/${id}/editions/`)
+        axios.get(`${ApiURL}/contests/${id}/editions/?actual=true`)
         .then(response => {
             console.log(response);
-            setEditions(response.data);
+            setEditionsActual(response.data);
         })
+        .then(
+           axios.get(`${ApiURL}/contests/${id}/editions/?actual=false`) 
+           .then(response => {
+            console.log(response);
+            setEditionsOld(response.data);
+        })
+        )
         .catch(errors => {
             console.log(errors);
         })
@@ -34,19 +42,31 @@ export const Contest = () => {
     return (
         <>
             <h1>{contest.name}</h1>
-            <div className="btn-group">
-                <LinkButton id={id} link="rezerwacja-panstw" label="Zarezerwuj państwo"/>
-                <LinkButton id={id} link="zglaszanie-piosenki" label="Zgłoś piosenkę"/>
-                <LinkButton id={id} link="glosowanie" label="Zagłosuj"/>
-            </div>
+            <ul>
+                {editionsActual.length > 0 ? (
+                    editionsActual.map((editionActual) => (
+                        <li key={editionActual.id}>
+                            <p>Edycja {editionActual.count}</p>
+                            <div className="btn-group">
+                                <LinkButton id={id} edition = {editionActual.id} link="rezerwacja-panstw" label="Zarezerwuj państwo"/>
+                                <LinkButton id={id} edition = {editionActual.id} link="zglaszanie-piosenki" label="Zgłoś piosenkę"/>
+                                <LinkButton id={id} edition = {editionActual.id} link="glosowanie" label="Zagłosuj"/>
+                            </div>
+                        </li>
+                    ))
+                ) : (
+                    <li>Żadna edycja jeszcze się nie odbyła</li>
+                )} 
+            </ul>
             <p>Regulamin</p>
             <p>Czat</p>
-            <p>Edycje</p>
+            <h2>Archiwum edycji</h2>
             <ul>
-                {editions.length > 0 ? (
-                    editions.map((edition) => (
-                        <li key={edition.id}>
-                            {edition.count}
+                {editionsOld.length > 0 ? (
+                    editionsOld.map((editionOld) => (
+                        <li key={editionOld.id}>
+                            <p>Edycja {editionOld.count}</p>
+                            <LinkButton id={id} edition = {editionOld.id} link={`wyniki/1`} label="Wyniki edycji"/>
                         </li>
                     ))
                 ) : (

@@ -4,7 +4,7 @@ export const LinkButton = (props) => {
 
     return (
         <>
-            <a href={`${props.id}/${props.link}`}><button className="btn btn-primary" type="button">{props.label}</button></a>
+            <a href={`${props.id}/${props.edition}/${props.link}`}><button className="btn btn-primary" type="button">{props.label}</button></a>
         </>
     );
 }

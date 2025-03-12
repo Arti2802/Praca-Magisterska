@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import ApiURL from "../ApiURL";
 
@@ -18,12 +18,23 @@ export const Home = () => {
     return (
         <>
             <form>
-                <a href="/dodaj-konkurs"><button type="button">Stwórz konkurs</button></a>
+                <a href="/dodaj-konkurs"><button className="btn btn-primary" type="button">Stwórz konkurs</button></a>
             </form>
             <h1>Konkursy</h1>
-            {contests.map((contest) => (
-                <a href={`${contest.id}`}><p key={contest.id}>{contest.name}</p></a>
-            ))}
+
+            <div className="container">
+                <div className="row row-cols-3 gx-6 row-gap-3">
+                    {contests.map((contest) => (
+                        <div className="col text-center">
+                            <a className="list-group-item" key={contest.id} href={`${contest.id}`}>
+                                <div className="border border-primary rounded-2 bg-primary-subtle text-primary-emphasis">
+                                    <h2 className="p-4">{contest.name}</h2>
+                                </div>
+                            </a>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </>
     );
 }

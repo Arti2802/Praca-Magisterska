@@ -11,6 +11,7 @@ class EditionsList(generics.ListCreateAPIView):
     name = "editions"
     serializer_class = EditionSerializer
     queryset = Edition.objects.all()
+    filterset_fields = ['actual']
 
 
 class EditionDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -22,6 +23,8 @@ class EditionDetail(generics.RetrieveUpdateDestroyAPIView):
 class EditionsInContest(generics.ListCreateAPIView):
     name = "editions-in-contest"
     serializer_class = EditionSerializer
+    filterset_fields = ['actual']
+    ordering_fields = ['count']
 
     def get_queryset(self):
         return Edition.objects.filter(contest=self.kwargs.get('pk'))

@@ -10,6 +10,8 @@ class Country(models.Model):
 
 
 class CountryInEdition(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    #country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = CountryField()
     edition = models.ForeignKey(Edition, on_delete=models.SET_NULL, null=True)
-    borrowers = models.ManyToManyField(Country, related_name="borrower")
+    #borrowers = models.ManyToManyField(Country, related_name="borrower")
+    borrowers = CountryField(multiple=True, default=[], blank=True)

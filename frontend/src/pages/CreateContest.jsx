@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiURL from "../ApiURL";
@@ -14,6 +14,13 @@ export const CreateContest = () => {
         setData({
             ...data,
             [e.target.name]: value
+        });
+    };
+    const handleChangeLogo = (e) => {
+        const file = e.target.files[0];
+        setData({
+            ...data,
+            [e.target.name]: file
         });
     };
     const handleCreate = async(e) => {
@@ -46,11 +53,15 @@ export const CreateContest = () => {
     return (
         <>
             <h1>Stwórz konkurs</h1>
-            <form onSubmit={handleCreate}>
-                    <input placeholder="Nazwa" name="name" onChange={handleChange}/><br/>
-                    <label htmlFor="logo">Logo</label>
-                    <input type="file" name="logo" onChange={handleChange}/><br/>
-                    <button type="submit">Zatwierdź</button>
+            <form className="col-3 mx-2 group" onSubmit={handleCreate}>
+                    <div className="mb-3">
+                        <input className="form-control" placeholder="Nazwa" name="name" onChange={handleChange}/>
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label" htmlFor="logo">Logo</label>
+                        <input className="form-control" type="file" name="logo" onChange={handleChangeLogo}/>
+                    </div>
+                    <button className="btn btn-success" type="submit">Zatwierdź</button>
             </form>
         </>
     );
