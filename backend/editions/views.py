@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Edition, UserInEdition
-from contests.models import UserInContest
+from users.models import UserInContest
 from .serializers import EditionSerializer
 
 # Create your views here.

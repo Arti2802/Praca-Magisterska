@@ -8,6 +8,7 @@ import { LinkButton } from "../components/LinkButton";
 export const Contest = () => {
     const { id } = useParams();
     const [contest, setContest] = useState({});
+    const [users, setUsers] = useState([]);
     const [editionsActual, setEditionsActual] = useState([]);
     const [editionsOld, setEditionsOld] = useState([]);
 
@@ -16,6 +17,17 @@ export const Contest = () => {
         .then(response => {
             console.log(response);
             setContest(response.data);
+        })
+        .catch(errors => {
+            console.log(errors);
+        })
+    }, [id])
+
+    useEffect(() => {
+        axios.get(`${ApiURL}/contests/${id}/users/`)
+        .then(response => {
+            console.log(response);
+            setUsers(response.data);
         })
         .catch(errors => {
             console.log(errors);
@@ -42,6 +54,20 @@ export const Contest = () => {
     return (
         <>
             <h1>{contest.name}</h1>
+            <div className="float-end">
+                <h2>Użytkownicy</h2>
+                <ul>
+                    {users.length > 0 ? (
+                        users.map((user) => (
+                            <li key={user.id}>
+                                {user.user.username}
+                            </li>
+                        ))
+                    ) : (
+                        <li>Brak użytkowników</li>
+                    )}
+                </ul>
+            </div>
             <ul>
                 {editionsActual.length > 0 ? (
                     editionsActual.map((editionActual) => (

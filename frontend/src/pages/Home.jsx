@@ -6,7 +6,7 @@ import ApiURL from "../ApiURL";
 export const Home = () => {
     const [contests, setContests] = useState([]);
     useEffect(() => {
-        axios.get(`${ApiURL}/contests/`)
+        axios.get(`${ApiURL}/users/${sessionStorage.getItem('id')}/contests/`)
         .then(response => {
             console.log(response);
             setContests(response.data);
@@ -25,8 +25,8 @@ export const Home = () => {
             <div className="container">
                 <div className="row row-cols-3 gx-6 row-gap-3">
                     {contests.map((contest) => (
-                        <div className="col text-center">
-                            <a className="list-group-item" key={contest.id} href={`${contest.id}`}>
+                        <div className="col text-center hovered" data-mdb-ripple-init data-mdb-ripple-color="dark" key={contest.id}>
+                            <a className="list-group-item" href={`/konkursy/${contest.id}`}>
                                 <div className="border border-primary rounded-2 bg-primary-subtle text-primary-emphasis">
                                     <h2 className="p-4">{contest.name}</h2>
                                 </div>

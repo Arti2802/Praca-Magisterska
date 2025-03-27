@@ -12,6 +12,7 @@ class VotesList(generics.ListCreateAPIView):
     name = "votes"
     serializer_class = VoteSerializer
     queryset = Vote.objects.all()
+    filterset_fields = ['points', 'entry']
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, many=True)

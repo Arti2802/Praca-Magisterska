@@ -57,6 +57,16 @@ class PhasesInContest(generics.ListAPIView):
         return Phase.objects.filter(edition__in=editions)
 
 
+class FinalsInContest(generics.ListAPIView):
+    name = "finals-in-contest"
+    serializer_class = FinalSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        editions = Edition.objects.filter(contest=pk)
+        return Final.objects.filter(edition__in=editions)
+
+
 class PhasesInEdition(generics.ListAPIView):
     name = "phases-in-edition"
 

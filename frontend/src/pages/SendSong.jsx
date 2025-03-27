@@ -27,7 +27,7 @@ export const SendSong = () => {
                 'ts': data.ts,
                 'artist': data.artist,
                 'title': data.title,
-                'user': 1,
+                'user': sessionStorage.getItem('id'),
                 'edition': id2
             }
 
@@ -56,23 +56,23 @@ export const SendSong = () => {
             <form className="col-3 mx-2 group" onSubmit={handleSend}>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="yt">Artysta</label>
-                    <input className="form-control" placeholder="Artysta" name="artist" onChange={handleChange}/>
+                    <input className="form-control border border-primary" placeholder="Artysta" name="artist" onChange={handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="yt">Tytuł</label>
-                    <input className="form-control" placeholder="Tytuł" name="title" onChange={handleChange}/>
+                    <input className="form-control border border-primary" placeholder="Tytuł" name="title" onChange={handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="yt">Link YT</label>
-                    <input className="form-control" placeholder="Link YT" name="yt" onChange={handleChange}/>
+                    <input className="form-control border border-primary" placeholder="Link YT" name="yt" onChange={handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="spotify">Link Spotify</label>
-                    <input className="form-control" placeholder="Link Spotify" name="spotify" onChange={handleChange}/>
+                    <input className="form-control border border-primary" placeholder="Link Spotify" name="spotify" onChange={handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="ts">Fragment z YT (TS)</label>
-                    <input className="form-control" placeholder="0:00" name="ts" onChange={handleChange}/>
+                    <input className="form-control border border-primary" placeholder="0:00" name="ts" onChange={handleChange}/>
                 </div>
                 <ConfirmButton label="Zatwierdź"/>
             </form>

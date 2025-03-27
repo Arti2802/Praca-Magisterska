@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import ApiURL from "../ApiURL";
 import ReactCountryFlag from "react-country-flag";
 import { ConfirmButton } from "../components/ConfirmButton";
+//import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { SortableItem } from "../components/SortableItem";
+import { SortableList } from "../components/SortableList";
 
 export const ClaimingCountry = () => {
     const { id2 } = useParams();
@@ -24,19 +27,16 @@ export const ClaimingCountry = () => {
     return (
         <>
             <h1>Państwa</h1>
-            <ul>
-                {countries.length > 0 ? (
-                    countries.map((country) => (
-                        <li key={country.id}>
-                            <ReactCountryFlag countryCode={country.country.code} style={{width: '3em', height: '3em'}} svg/>
-                            {country.country.name}
-                        </li>
-                    ))
-                ) : (
-                    <li>Żadna państwo nie bierze udziału w tej edycji</li>
-                )} 
-            </ul>
+            <SortableList items={countries} setItems={setCountries}>
+                {countries.map((country) => (
+                    <SortableItem key={country.id} id={country}>
+                        <ReactCountryFlag countryCode={country.country.code} style={{width: '3em', height: '3em'}} svg/>
+                        {country.country.name}
+                    </SortableItem>
+                ))}
+            </SortableList>
             <ConfirmButton label="Zatwierdź"/>
         </>
     );
+
 }

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Contest, UserInContest
+from .models import Contest
+from users.models import UserInContest
 from .serializers import ContestSerializer
 
 # Create your views here.
@@ -25,4 +26,5 @@ class UsersContests(generics.ListCreateAPIView):
     def get_queryset(self):
         pk = self.kwargs.get('pk')
         user_contests = UserInContest.objects.filter(user=pk)
-        return Contest.objects.filter(id__in=user_contests)
+        ids = [user.contest.id for user in user_contests]
+        return Contest.objects.filter(id__in=ids)

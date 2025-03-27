@@ -4,7 +4,7 @@ export const ConfirmButton = (props) => {
 
     return (
         <>
-            <button className="btn btn-success">{props.label}</button>
+            <button className="btn btn-success" type="submit">{props.label}</button>
         </>
     );
 }
