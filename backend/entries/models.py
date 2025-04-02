@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from editions.models import Edition
 from users.models import User
-from phases.models import Phase
+from phases.models import Phase, Semifinal, Final
 
 
 class Entry(models.Model):
@@ -20,7 +20,14 @@ class Entry(models.Model):
 
 
 class EntryInPhase(models.Model):
-    entry = models.OneToOneField(Entry, on_delete=models.CASCADE)
-    phase = models.ForeignKey(Phase, on_delete=models.CASCADE)
     running_order = models.PositiveIntegerField()
 
+
+class EntryInSemifinal(EntryInPhase):
+    entry = models.OneToOneField(Entry, on_delete=models.CASCADE, null=True)
+    semifinal = models.ForeignKey(Semifinal, on_delete=models.CASCADE, null=True)
+
+
+class EntryInFinal(EntryInPhase):
+    entry = models.OneToOneField(Entry, on_delete=models.CASCADE, null=True)
+    final = models.ForeignKey(Final, on_delete=models.CASCADE, null=True)

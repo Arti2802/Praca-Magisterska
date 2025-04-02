@@ -5,16 +5,22 @@ from editions.models import Edition
 
 
 class Phase(models.Model):
-    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
     voting_start_date = models.DateTimeField()
     voting_end_date = models.DateTimeField()
     results_date = models.DateTimeField()
 
 
 class Semifinal(Phase):
+    edition = models.ForeignKey(Edition, on_delete=models.CASCADE, null=True)
     count = models.PositiveIntegerField()
     number_of_countries_qualify = models.PositiveIntegerField()
 
+    def __str__(self):
+        return str(self.count) + " półfinał " + str(self.edition)
+
 
 class Final(Phase):
-    pass
+    edition = models.OneToOneField(Edition, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return "Finał " + str(self.edition)

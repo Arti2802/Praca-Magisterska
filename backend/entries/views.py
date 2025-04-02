@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
-from .serializers import EntrySerializer, EntryInPhaseSerializer
-from .models import Entry, EntryInPhase
+from .serializers import EntrySerializer, EntryInPhaseSerializer, \
+    EntryInSemifinalSerializer, EntryInFinalSerializer
+from .models import Entry, EntryInPhase, EntryInSemifinal, EntryInFinal
+from phases.models import Phase, Semifinal, Final
 from rest_framework.views import APIView
 from votes.models import Vote
 
@@ -36,7 +38,33 @@ class EntriesInPhase(generics.ListCreateAPIView):
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')
-        return EntryInPhase.objects.filter(phase=pk)
+        if not EntryInFinal.objects.filter(final=pk).count():
+            return EntryInSemifinal.objects.filter(semifinal=pk)
+        return EntryInFinal.objects.filter(final=pk)
+
+
+class EntriesInSemifinal(generics.ListCreateAPIView):
+    name = "entries-in-semifinal"
+    serializer_class = EntryInSemifinalSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return EntryInSemifinal.objects.filter(semifinal=pk)
+
+
+class EntryInSemifinalDetail(generics.RetrieveUpdateDestroyAPIView):
+    name = "entry-in-semifinal"
+    serializer_class = EntryInSemifinalSerializer
+    queryset = EntryInSemifinal.objects.all()
+
+
+class EntriesInFinal(generics.ListCreateAPIView):
+    name = "entries-in-final"
+    serializer_class = EntryInFinalSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return EntryInFinal.objects.filter(final=pk)
 
 
 class Results(APIView):
@@ -44,14 +72,16 @@ class Results(APIView):
 
     def get(self, request, pk):
         data = []
-        entries_in_phase = EntryInPhase.objects.filter(phase=pk)
-        entries = Entry.objects.filter(id__in=entries_in_phase)
-        for entry in entries:
+        if Semifinal.objects.filter(id=pk).count():
+            entries_in_phase = EntryInSemifinal.objects.filter(semifinal=pk)
+        else:
+            entries_in_phase = EntryInFinal.objects.filter(final=pk)
+        for entry in entries_in_phase:
             votes = Vote.objects.filter(entry=entry)
             results = sum([vote.points for vote in votes])
             data.append({
                 'id': entry.id,
-                'song': str(entry),
+                'song': str(entry.entry),
                 'points': results,
             })
         return Response(data, 200)

@@ -1,24 +1,33 @@
 from rest_framework import serializers
-from .models import Entry, EntryInPhase
+from .models import Entry, EntryInPhase, EntryInSemifinal, EntryInFinal
 
 
-class EntryInPhaseSerializer(serializers.ModelSerializer):
+class EntryInSemifinalSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = EntryInPhase
+        model = EntryInSemifinal
+        fields = '__all__'
+
+
+class EntryInFinalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = EntryInFinal
         fields = '__all__'
 
 
 class EntrySerializer(serializers.ModelSerializer):
-    entryinphase = EntryInPhaseSerializer(read_only=True)
+    entryinsemifinal = EntryInSemifinalSerializer(read_only=True)
+    entryinfinal = EntryInFinalSerializer(read_only=True)
 
     class Meta:
         model = Entry
         fields = '__all__'
 
 
-# class EntryInPhaseSerializer(serializers.ModelSerializer):
-#
-#     class Meta:
-#         model = EntryInPhase
-#         fields = '__all__'
+class EntryInPhaseSerializer(serializers.ModelSerializer):
+    entry = EntrySerializer(read_only=True)
+
+    class Meta:
+        model = EntryInPhase
+        fields = '__all__'

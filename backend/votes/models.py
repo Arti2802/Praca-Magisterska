@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import User
-from entries.models import Entry
+from entries.models import EntryInPhase
 
 # Create your models here.
 
@@ -8,4 +8,4 @@ from entries.models import Entry
 class Vote(models.Model):
     points = models.PositiveIntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
+    entry = models.ForeignKey(EntryInPhase, on_delete=models.CASCADE)

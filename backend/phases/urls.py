@@ -10,5 +10,5 @@ urlpatterns = [
     path('finals/<int:pk>/', FinalDetail.as_view(), name=FinalDetail.name),
     path('contests/<int:pk>/phases/', PhasesInContest.as_view(), name=PhasesInContest.name),
     path('contests/<int:pk>/finals/', FinalsInContest.as_view(), name=FinalsInContest.name),
-    path('editions/<int:pk>/phases/', PhasesInEdition.as_view(), name=PhasesInEdition.name),
+    path('editions/<int:pk>/semifinals/', SemifinalsInEdition.as_view(), name=SemifinalsInEdition.name),
 ]

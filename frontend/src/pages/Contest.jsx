@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ApiURL from "../ApiURL";
 import { LinkButton } from "../components/LinkButton";
+import { IoMdSettings } from "react-icons/io";
 
 export const Contest = () => {
     const { id } = useParams();
@@ -53,7 +54,10 @@ export const Contest = () => {
     }, [id])
     return (
         <>
-            <h1>{contest.name}</h1>
+            <h1 style={{float: 'left'}}>{contest.name}</h1>
+            <a href={`${id}/ustawienia`}>
+                <IoMdSettings className="sort"/>
+            </a>
             <div className="float-end">
                 <h2>Użytkownicy</h2>
                 <ul>
@@ -68,7 +72,7 @@ export const Contest = () => {
                     )}
                 </ul>
             </div>
-            <ul>
+            <ul style={{clear: 'left'}}>
                 {editionsActual.length > 0 ? (
                     editionsActual.map((editionActual) => (
                         <li key={editionActual.id}>
@@ -77,6 +81,8 @@ export const Contest = () => {
                                 <LinkButton id={id} edition = {editionActual.id} link="rezerwacja-panstw" label="Zarezerwuj państwo"/>
                                 <LinkButton id={id} edition = {editionActual.id} link="zglaszanie-piosenki" label="Zgłoś piosenkę"/>
                                 <LinkButton id={id} edition = {editionActual.id} link="glosowanie" label="Zagłosuj"/>
+                                <LinkButton id={id} edition = {editionActual.id} link="informacje" label="Informacje o edycji"/>
+                                <LinkButton id={id} edition = {editionActual.id} link="edytuj" label="Edytuj"/>
                             </div>
                         </li>
                     ))
@@ -92,7 +98,7 @@ export const Contest = () => {
                     editionsOld.map((editionOld) => (
                         <li key={editionOld.id}>
                             <p>Edycja {editionOld.count}</p>
-                            <LinkButton id={id} edition = {editionOld.id} link={`wyniki/1`} label="Wyniki edycji"/>
+                            <LinkButton id={id} edition = {editionOld.id} link={`wyniki/${editionOld.final.id}`} label="Wyniki edycji"/>
                         </li>
                     ))
                 ) : (
