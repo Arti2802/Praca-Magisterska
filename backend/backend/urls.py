@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('countries.urls')),
     path('', include('editions.urls')),
     path('', include('entries.urls')),
+    path('', include('notifications.urls')),
     path('', include('phases.urls')),
     path('', include('users.urls')),
     path('', include('votes.urls')),

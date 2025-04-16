@@ -2,8 +2,9 @@ from django.db import models
 
 # Create your models here.
 from editions.models import Edition
-from users.models import User
 from phases.models import Phase, Semifinal, Final
+from countries.models import CountryInEdition
+#from users.models import User
 
 
 class Entry(models.Model):
@@ -12,7 +13,8 @@ class Entry(models.Model):
     Youtube_URL = models.URLField()
     Spotify_URL = models.URLField()
     ts = models.TimeField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    country = models.ForeignKey(CountryInEdition, on_delete=models.SET_NULL, null=True)
     edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -20,7 +22,7 @@ class Entry(models.Model):
 
 
 class EntryInPhase(models.Model):
-    running_order = models.PositiveIntegerField()
+    running_order = models.PositiveIntegerField(null=True, blank=True)
 
 
 class EntryInSemifinal(EntryInPhase):

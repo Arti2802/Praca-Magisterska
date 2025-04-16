@@ -5,6 +5,9 @@ import { Page404 } from "./pages/Page404";
 import { LoginPage } from "./pages/LoginPage";
 import { Rejestration } from "./pages/Rejestration";
 import { Contest } from "./pages/Contest";
+import { ContestSettings } from "./pages/ContestSettings";
+import { Invitation } from "./pages/Invitation";
+import { Users } from "./pages/Users";
 import { CreateContest } from "./pages/CreateContest";
 import { ClaimingCountry } from "./pages/ClaimingCountry";
 import { SendSong } from "./pages/SendSong";
@@ -18,6 +21,7 @@ import { RunningOrder } from "./pages/RunningOrder";
 import { EditEdition } from "./pages/EditEdition";
 import { SetCountriesInEdition } from "./pages/SetCountriesInEdition";
 import { Applications } from "./pages/Applications";
+import { SetSemifinals } from "./pages/SetSemifinals";
 import { SetRunningOrder } from "./pages/SetRunningOrder";
 
 function App() {
@@ -30,6 +34,9 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path='*' element={<Page404/>}/>
           <Route path='/konkursy/:id' element={<Contest/>}/>
+          <Route path='/konkursy/:id/ustawienia' element={<ContestSettings/>}/>
+          <Route path='/konkursy/:id/zaproszenie' element={<Invitation/>}/>
+          <Route path='/konkursy/:id/czlonkowie' element={<Users/>}/>
           <Route path='/dodaj-konkurs' element={<CreateContest/>}/>
           <Route path='/konkursy/:id/:id2/rezerwacja-panstw' element={<ClaimingCountry/>}/>
           <Route path='/konkursy/:id/:id2/zglaszanie-piosenki' element={<SendSong/>}/>
@@ -43,6 +50,7 @@ function App() {
           <Route path='/konkursy/:id/:id2/edytuj' element={<EditEdition/>}/>
           <Route path='/konkursy/:id/:id2/wybierz-panstwa' element={<SetCountriesInEdition/>}/>
           <Route path='/konkursy/:id/:id2/zgloszenia' element={<Applications/>}/>
+          <Route path='/konkursy/:id/:id2/ustal-polfinaly' element={<SetSemifinals/>}/>
           <Route path='/konkursy/:id/:id2/ustal-kolejnosc-wystepow' element={<SetRunningOrder/>}/>
         </Route>
       </Routes>

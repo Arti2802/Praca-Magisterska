@@ -25,7 +25,7 @@ export const SetRunningOrder = () => {
     return (
         <>
             <h1>Ustal kolejność występów</h1>
-            <UnderlineNav page={"ustal-kolejnosc-piosenek"} link_idx={1}/>
+            <UnderlineNav page={"ustal-kolejnosc-wystepow"} link_idx={1}/>
             <SortableList items={entries} setItems={setEntries}>
                 {entries.length > 0 ? (
                     entries.map((entry) => (

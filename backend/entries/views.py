@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import EntrySerializer, EntryInPhaseSerializer, \
-    EntryInSemifinalSerializer, EntryInFinalSerializer
+    EntryInSemifinalSerializer, EntryInFinalSerializer, EntryReprSerializer
 from .models import Entry, EntryInPhase, EntryInSemifinal, EntryInFinal
 from phases.models import Phase, Semifinal, Final
 from rest_framework.views import APIView
@@ -25,7 +25,7 @@ class EntryDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class EntriesInEdition(generics.ListCreateAPIView):
     name = "entries-in-edition"
-    serializer_class = EntrySerializer
+    serializer_class = EntryReprSerializer
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')

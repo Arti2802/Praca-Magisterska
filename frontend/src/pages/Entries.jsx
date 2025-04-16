@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import ApiURL from "../ApiURL";
 import { UnderlineNav } from "../components/UnderlineNav";
+import { CountryRepresentation } from "../components/CountryRepresentation";
 
 export const Entries = () => {
     const { id2 } = useParams();
@@ -30,6 +31,7 @@ export const Entries = () => {
                 {entries.length > 0 ? (
                     entries.map((entry) => (
                         <li key={entry.id}>
+                            {entry.country ? <CountryRepresentation country={entry.country}/> : null}
                             <p>{entry.artist} - {entry.title}</p>
                             <p><a href={entry.Youtube_URL}>Youtube</a></p>
                             <p><a href={entry.Spotify_URL}>Spotify</a></p>

@@ -5,9 +5,9 @@ from editions.models import Edition
 
 
 class Phase(models.Model):
-    voting_start_date = models.DateTimeField()
-    voting_end_date = models.DateTimeField()
-    results_date = models.DateTimeField()
+    voting_start_date = models.DateTimeField(null=True, blank=True)
+    voting_end_date = models.DateTimeField(null=True, blank=True)
+    results_date = models.DateTimeField(null=True, blank=True)
 
 
 class Semifinal(Phase):

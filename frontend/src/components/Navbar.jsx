@@ -2,17 +2,21 @@ import React from "react";
 import { NavItem } from "../components/NavItem";
 import { LogOutButton } from "../components/LogOutButton";
 import { FaHome } from "react-icons/fa";
+import { NotificationsBell } from "./NotificationsBell";
 
 export const Navbar = () => {
     return(
         <>
             <nav className="navbar bg-primary px-2" data-bs-theme="dark">
                 <ul className="navbar-nav">
-                    <NavItem link={'/'} label={<FaHome className="icon hovered"/>}/>
+                    <NavItem link={'/'} label={<FaHome className="icon white hovered"/>}/>
                 </ul>
                 {sessionStorage.getItem('isLogged') === 'true' ?
                 <>
-                    <LogOutButton/>
+                    <div className="d-flex justify-content-end">
+                        <NotificationsBell/>
+                        <LogOutButton/>
+                    </div>
                 </>
                 :
                 <>

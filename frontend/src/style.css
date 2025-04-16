@@ -293,8 +293,15 @@
     .icon {
         height: 30px;
         width: 30px;
+    }
+
+    .white {
         color: #ffffff;
     }
+
+    .red {
+        color: #ff0000;
+    } 
 
     .sort {
         height: 30px;
@@ -302,7 +309,7 @@
         color: #000000;
     }
 
-    .icon2 {
+    .icon {
         height: 30px;
         width: 30px;
     }

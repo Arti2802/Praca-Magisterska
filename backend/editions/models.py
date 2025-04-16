@@ -12,6 +12,10 @@ class Edition(models.Model):
     actual = models.BooleanField(default=True)
     postponed = models.BooleanField(default=False)
     special = models.BooleanField(default=False)
+    claiming_start_date = models.DateTimeField(null=True)
+    claiming_end_date = models.DateTimeField(null=True)
+    sending_songs_start = models.DateTimeField(null=True)
+    sending_songs_end = models.DateTimeField(null=True)
 
     def __str__(self):
         return "Edycja {} {}".format(self.count, self.contest)

@@ -4,8 +4,6 @@ export const LogOutButton = () => {
         sessionStorage.setItem('id', '0');
     }
     return (
-        <div className="d-flex justify-content-end">
-            <button className="btn btn-outline-light" onClick={handleLogout}><a className="nav-link" href='/'>Wyloguj się</a></button>
-        </div>
+        <button className="btn btn-outline-light ms-4" onClick={handleLogout}><a className="nav-link" href='/'>Wyloguj się</a></button>
     )
 }

@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import ApiURL from "../ApiURL";
-import ReactCountryFlag from "react-country-flag";
+//import ReactCountryFlag from "react-country-flag";
 import { UnderlineNav } from "../components/UnderlineNav";
+import { CountryRepresentation } from "../components/CountryRepresentation";
 
 export const Countries = () => {
     const { id2 } = useParams();
@@ -27,18 +28,21 @@ export const Countries = () => {
         <>
             <h1>Państwa</h1>
             <UnderlineNav page={"panstwa"} link_idx={0}/>
-            <ul>
+            <div>
                 {countries.length > 0 ? (
                     countries.map((country) => (
-                        <li key={country.id}>
-                            <ReactCountryFlag countryCode={country.country.code} style={{width: '3em', height: '3em'}} svg/>
-                            {country.country.name}
-                        </li>
+                        // <li key={country.id}>
+                        //     <ReactCountryFlag countryCode={country.country.code} style={{width: '3em', height: '3em'}} svg/>
+                        //     {country.country.name}
+                        // </li>
+                        <div key={country.id}>
+                            <CountryRepresentation country={country.country}/>
+                        </div>
                     ))
                 ) : (
                     <li>Brak piosenek</li>
                 )}
-            </ul>
+            </div>
         </>
     );
 }

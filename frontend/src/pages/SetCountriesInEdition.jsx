@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 //import { useParams } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import ApiURL from "../ApiURL";
-import ReactCountryFlag from "react-country-flag";
+//import ReactCountryFlag from "react-country-flag";
 import { UnderlineNav } from "../components/UnderlineNav";
 import { ConfirmButton } from "../components/ConfirmButton";
+import { CountryRepresentation } from "../components/CountryRepresentation";
 
 export const SetCountriesInEdition = () => {
     //const { id2 } = useParams();
@@ -28,19 +29,18 @@ export const SetCountriesInEdition = () => {
         <>
             <h1>Państwa</h1>
             <UnderlineNav page={"wybierz-panstwa"} link_idx={1}/>
-            <ul>
+            <div className="overflow-scroll" style={{height: '400px', width: '400px'}}>
                 {countries.length > 0 ? (
                     countries.map((country) => (
-                        <li key={country.code}>
-                            <ReactCountryFlag countryCode={country.code} style={{width: '3em', height: '3em'}} svg/>
-                            {country.name}
+                        <div key={country.code}>
+                            <CountryRepresentation country={country} key={country.id}/>
                             <input className="form-check-input border border-primary" type="checkbox"/>
-                        </li>
+                        </div>
                     ))
                 ) : (
-                    <li>Brak piosenek</li>
+                    <li>Brak państw</li>
                 )}
-            </ul>
+            </div>
             <ConfirmButton label={"Zatwierdź"}/>
         </>
     );

@@ -2,12 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ApiURL from "../ApiURL";
+import ReactCountryFlag from "react-country-flag";
 
 export const PhaseWithRunningOrder = ({id}) => {
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {
-        axios.get(`${ApiURL}/phases/${id}/entries`)
+        if (id) {
+            axios.get(`${ApiURL}/phases/${id}/entries`)
         .then(response => {
             console.log(response);
             setEntries(response.data);
@@ -15,6 +17,15 @@ export const PhaseWithRunningOrder = ({id}) => {
         .catch(errors => {
             console.log(errors);
         })
+        }
+        // axios.get(`${ApiURL}/phases/${id}/entries`)
+        // .then(response => {
+        //     console.log(response);
+        //     setEntries(response.data);
+        // })
+        // .catch(errors => {
+        //     console.log(errors);
+        // })
     }, [id])
 
     return (
@@ -23,7 +34,9 @@ export const PhaseWithRunningOrder = ({id}) => {
                 {entries.length > 0 ? (
                     entries.map((entry) => (
                         <li key={entry.id}>
-                            {entry.running_order}. {entry.entry?.artist} - {entry.entry?.title}
+                            {entry.running_order}. <ReactCountryFlag countryCode={entry.entry.country?.country.code} style={{width: '3em', height: '3em'}} svg/> 
+                            {entry.entry?.artist} - {entry.entry?.title}
+                            {console.log("to", entry)}
                         </li>
                     ))
                 ) : (
