@@ -25,6 +25,7 @@ export const SendSong = () => {
                 'Youtube_URL': data.yt,
                 'Spotify_URL': data.spotify,
                 'ts': data.ts,
+                'additional_info': data.additional_info,
                 'artist': data.artist,
                 'title': data.title,
                 'user': sessionStorage.getItem('id'),
@@ -54,25 +55,29 @@ export const SendSong = () => {
         <>
             <h1>Zgłoś utwór</h1>
             <form className="col-3 mx-2 group" onSubmit={handleSend}>
-                <div className="mb-3">
+                <div className="mb-2">
                     <label className="form-label" htmlFor="yt">Artysta</label>
                     <input className="form-control border border-primary" placeholder="Artysta" name="artist" onChange={handleChange}/>
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                     <label className="form-label" htmlFor="yt">Tytuł</label>
                     <input className="form-control border border-primary" placeholder="Tytuł" name="title" onChange={handleChange}/>
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                     <label className="form-label" htmlFor="yt">Link YT</label>
                     <input className="form-control border border-primary" placeholder="Link YT" name="yt" onChange={handleChange}/>
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                     <label className="form-label" htmlFor="spotify">Link Spotify</label>
                     <input className="form-control border border-primary" placeholder="Link Spotify" name="spotify" onChange={handleChange}/>
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                     <label className="form-label" htmlFor="ts">Fragment z YT (TS)</label>
                     <input className="form-control border border-primary" placeholder="0:00" name="ts" onChange={handleChange}/>
+                </div>
+                <div className="mb-2">
+                    <label className="form-label" htmlFor="additional_info">Dodatkowe informacje</label>
+                    <textarea className="form-control border border-primary" placeholder="Dodatkowe informacje..." name="additional_info" onChange={handleChange}/>
                 </div>
                 <ConfirmButton label="Zatwierdź"/>
             </form>

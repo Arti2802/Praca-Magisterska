@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import ApiURL from "../ApiURL";
-//import ReactCountryFlag from "react-country-flag";
+import ReactCountryFlag from "react-country-flag";
 import { UnderlineNav } from "../components/UnderlineNav";
 import { CountryRepresentation } from "../components/CountryRepresentation";
 
@@ -37,6 +37,14 @@ export const Countries = () => {
                         // </li>
                         <div key={country.id}>
                             <CountryRepresentation country={country.country}/>
+                            {country.borrowers.length > 0 ? (
+                                <span>
+                                    <span>...</span>
+                                    ({country.borrowers.map((borrower) => (
+                                        <ReactCountryFlag key={borrower} countryCode={borrower} style={{width: '3em', height: '3em'}} svg/>
+                                    ))})
+                                </span>
+                            ) : null}
                         </div>
                     ))
                 ) : (

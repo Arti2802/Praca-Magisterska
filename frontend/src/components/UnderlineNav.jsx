@@ -1,12 +1,12 @@
 export const UnderlineNav = ({page, link_idx}) => {
     const links = [
         ["informacje", "piosenki", "panstwa", "kolejnosc-wystepow"],
-        ["edytuj", "wybierz-panstwa", "zgloszenia", "ustal-polfinaly", "ustal-kolejnosc-wystepow"],
+        ["edytuj", "etapy", "wybierz-panstwa", "zgloszenia", "ustal-polfinaly", "ustal-kolejnosc-wystepow"],
         ["ustawienia", "zaproszenie", "czlonkowie"]
     ];
     const labels = [
         ["Ogólne", "Piosenki", "Państwa", "Kolejność występów"],
-        ["Ogólne", "Wybór państw", "Zgłoszenia", "Półfinały", "Kolejność występów"],
+        ["Ogólne", "Etapy", "Wybór państw", "Zgłoszenia", "Półfinały", "Kolejność występów"],
         ["Ustawienia", "Zaproszenie", "Członkowie"]
     ];
     return (

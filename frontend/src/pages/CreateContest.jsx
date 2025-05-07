@@ -52,14 +52,14 @@ export const CreateContest = () => {
     }
     return (
         <>
-            <h1>Stwórz konkurs</h1>
+            <h1 className="mb-3">Stwórz konkurs</h1>
             <form className="col-3 mx-2 group" onSubmit={handleCreate}>
-                    <div className="mb-3">
-                        <input className="form-control" placeholder="Nazwa" name="name" onChange={handleChange} required/>
+                    <div className="mb-2">
+                        <input className="form-control border border-primary" placeholder="Nazwa" name="name" onChange={handleChange} required/>
                     </div>
                     <div className="mb-3">
                         <label className="form-label" htmlFor="logo">Logo</label>
-                        <input className="form-control" type="file" name="logo" accept="image/*" onChange={handleChangeLogo}/>
+                        <input className="form-control border border-primary" type="file" name="logo" accept="image/*" onChange={handleChangeLogo}/>
                     </div>
                     <button className="btn btn-success" type="submit">Zatwierdź</button>
             </form>

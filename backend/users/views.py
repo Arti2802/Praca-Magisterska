@@ -44,7 +44,23 @@ class UsersInContest(generics.ListCreateAPIView):
         return UserInContest.objects.filter(contest=pk)
 
 
+class UserInContestProfile(generics.ListAPIView):
+    name = "user-in-contest-profile"
+    serializer_class = UserInContestSerializer
+
+    def get_queryset(self):
+        contest = self.kwargs.get('cont_pk')
+        user = self.kwargs.get('user_pk')
+        return UserInContest.objects.filter(contest=contest, user=user)
+
+
 class UsersInContestPost(generics.ListCreateAPIView):
     name = "users-in-contest"
+    serializer_class = UserInContestPostSerializer
+    queryset = UserInContest.objects.all()
+
+
+class UsersInContestDetail(generics.RetrieveUpdateDestroyAPIView):
+    name = "users-in-contest-detail"
     serializer_class = UserInContestPostSerializer
     queryset = UserInContest.objects.all()

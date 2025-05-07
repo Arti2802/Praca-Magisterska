@@ -13,7 +13,7 @@ export const Entries = () => {
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {
-        axios.get(`${ApiURL}/editions/${id2}/entries`)
+        axios.get(`${ApiURL}/editions/${id2}/entries/?status=1`)
         .then(response => {
             console.log(response);
             setEntries(response.data);

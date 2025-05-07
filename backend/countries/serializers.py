@@ -15,6 +15,15 @@ class CountrySerializer(serializers.ModelSerializer):
 
 class CountryPostSerializer(serializers.ModelSerializer):
     country = CountryField(country_dict=True)
+    borrowers = serializers.ListSerializer(child=serializers.CharField())
+
+    class Meta:
+        model = CountryInEdition
+        fields = '__all__'
+
+
+class CountryInEditionSerializer(serializers.ModelSerializer):
+    borrowers = serializers.ListSerializer(child=serializers.CharField())
 
     class Meta:
         model = CountryInEdition

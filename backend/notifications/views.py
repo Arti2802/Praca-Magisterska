@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
 from .models import Notification
 from .serializers import NotificationSerializer, ScheduleSerializer
 from django_q.models import Schedule
@@ -22,10 +25,20 @@ class NotificationDetail(generics.RetrieveUpdateDestroyAPIView):
 class NotificationForUser(generics.ListAPIView):
     name = 'notifications-for-user'
     serializer_class = NotificationSerializer
+    ordering = ['read', '-creation_date']
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')
         return Notification.objects.filter(user=pk)
+
+
+class ReadNotifications(APIView):
+    name = 'read-notification'
+
+    def put(self, request, **kwargs):
+        pk = kwargs.get('pk')
+        Notification.objects.filter(user=pk).update(read=True)
+        return Response({'status': 'odczytano wiadomości'}, status=HTTP_200_OK)
 
 
 class ScheduleList(generics.ListAPIView):

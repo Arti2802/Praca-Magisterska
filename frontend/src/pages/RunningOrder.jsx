@@ -33,22 +33,53 @@ export const RunningOrder = () => {
         <>
             <h1>Kolejność występów</h1>
             <UnderlineNav page={"kolejnosc-wystepow"} link_idx={0}/>
-            <ul>
+            <div className="accordion" id="accordionExample">
                 {semifinals.length > 0 ? (
-                    semifinals.map((semifinal) => (
-                        <li key={semifinal.id}>
-                            <h2>Półfinał {semifinal.count}</h2>
-                            <PhaseWithRunningOrder id={semifinal.id}/>
-                        </li>
+                    semifinals.map((semifinal, index) => (
+                        <div className="accordion-item" key={semifinal.id}>
+                            <h2 className="accordion-header">
+                                <button 
+                                className="accordion-button" 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target={`#collapse${semifinal.id}`} 
+                                aria-expanded="false" 
+                                aria-controls={`collapse${semifinal.id}`}>
+                                    Półfinał {semifinal.count}
+                                </button>
+                            </h2>
+                            <div 
+                            id={`collapse${semifinal.id}`} 
+                            className="accordion-collapse collapse"
+                            data-bs-parent="#accordionExample">
+                                <div className="accordion-body">
+                                    <PhaseWithRunningOrder id={semifinal.id}/>
+                                </div>
+                            </div>
+                        </div>
                     ))
                 ) : (
                     null
                 )}
-                <li>
-                    <h2>Finał</h2>
-                    <PhaseWithRunningOrder id={final?.id}/>
-                </li>
-            </ul>
+                <div className="accordion-item">
+                    <h2 className="accordion-header">
+                        <button 
+                        className="accordion-button" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#collapseFinal" 
+                        aria-expanded="false" 
+                        aria-controls="collapseFinal">
+                            Finał
+                        </button>
+                    </h2>
+                    <div id="collapseFinal" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div className="accordion-body">
+                            <PhaseWithRunningOrder id={final?.id}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

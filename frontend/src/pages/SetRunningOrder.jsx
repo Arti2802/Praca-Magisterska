@@ -7,12 +7,13 @@ import ApiURL from "../ApiURL";
 import { UnderlineNav } from "../components/UnderlineNav";
 import { SortableList } from "../components/SortableList";
 import { SortableItem } from "../components/SortableItem";
+import { ConfirmButton } from "../components/ConfirmButton";
 
 export const SetRunningOrder = () => {
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {
-        axios.get(`${ApiURL}/phases/2/entries/`)
+        axios.get(`${ApiURL}/phases/3/entries/`)
         .then(response => {
             console.log(response);
             setEntries(response.data);
@@ -28,15 +29,16 @@ export const SetRunningOrder = () => {
             <UnderlineNav page={"ustal-kolejnosc-wystepow"} link_idx={1}/>
             <SortableList items={entries} setItems={setEntries}>
                 {entries.length > 0 ? (
-                    entries.map((entry) => (
+                    entries.map((entry, index) => (
                         <SortableItem key={entry.id} id={entry}>
-                            {entry.running_order}. {entry.entry?.artist} - {entry.entry?.title}
+                            {entry.running_order ? entry.running_order : index+1}. {entry.entry?.artist} - {entry.entry?.title}
                         </SortableItem>
                     ))
                 ) : (
                  <p>Kolejność występów nie jest jeszcze znana</p>
                 )}
             </SortableList>
+            <ConfirmButton/>
         </>
     );
 }

@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import ApiURL from "../ApiURL";
 import { UnderlineNav } from "../components/UnderlineNav";
 import { ConfirmButton } from "../components/ConfirmButton";
+import { dateFormat } from "../components/dateFormat";
+import toast from "react-hot-toast";
 
 export const EditEdition = () => {
     const { id2 } = useParams();
@@ -23,37 +25,53 @@ export const EditEdition = () => {
         })
     }, [id2])
 
-    // const handleChange = (e) => {
-    //     const value = e.target.value;
-    //     setData({
-    //         ...data,
-    //         [e.target.name]: value
-    //     });
-    // };
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setEdition({
+            ...edition,
+            [e.target.name]: value
+        });
+    };
+
+    const handleEdit = async(e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.put(`${ApiURL}/editions/${id2}/`, edition);
+            console.log(response);
+            if (response.status === 200)
+            {
+                toast.success("Udało się edytować edycję!");
+            }
+        }
+        catch (err) {
+            toast.error("Coś poszło nie tak");
+            console.log(err);
+        }
+    }
 
     return (
         <>
             <h1>Edycja {edition.count}</h1>
             <UnderlineNav page={"edytuj"} link_idx={1}/>
-            <div className="w-50 mt-3">
+            <form className="w-50 mt-3" onSubmit={handleEdit}>
                 <div className="mb-3">
                     <label className="form-label">Data rozpoczęcia rezerwacji państw</label>
-                    <input className="form-control border border-primary" type="datetime-local" value={'2001-01-01 19:00'}/>
+                    <input className="form-control border border-primary" type="datetime-local" name="claiming_start_date" value={dateFormat(edition.claiming_start_date)} onChange={handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Data zakończenia rezerwacji państw</label>
-                    <input className="form-control border border-primary" type="datetime-local" value={'2001-01-01 19:00'}/>
+                    <input className="form-control border border-primary" type="datetime-local" name="claiming_end_date" value={dateFormat(edition.claiming_end_date)} onChange={handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Data rozpoczęcia wysyłania utworów</label>
-                    <input className="form-control border border-primary" type="datetime-local" value={'2001-01-01 19:00'}/>
+                    <input className="form-control border border-primary" type="datetime-local" name="sending_songs_start" value={dateFormat(edition.sending_songs_start)} onChange={handleChange}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Data zakończenia wysyłania utworów</label>
-                    <input className="form-control border border-primary" type="datetime-local" value={'2001-01-01 19:00'}/>
+                    <input className="form-control border border-primary" type="datetime-local" name="sending_songs_end" value={dateFormat(edition.sending_songs_end)} onChange={handleChange}/>
                 </div>
-            </div>
-            <ConfirmButton label={"Zatwierdź"}/>
+                <ConfirmButton/>
+            </form>
         </>
     );
 }

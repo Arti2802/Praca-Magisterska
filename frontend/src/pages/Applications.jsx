@@ -7,6 +7,7 @@ import ApiURL from "../ApiURL";
 import { UnderlineNav } from "../components/UnderlineNav";
 import { FcCheckmark } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 export const Applications = () => {
     const { id2 } = useParams();
@@ -14,7 +15,7 @@ export const Applications = () => {
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        axios.get(`${ApiURL}/editions/${id2}/entries/`)
+        axios.get(`${ApiURL}/editions/${id2}/applications/`)
         .then(response => {
             console.log(response);
             setApplications(response.data);
@@ -23,6 +24,15 @@ export const Applications = () => {
             console.log(errors);
         })
     }, [id2])
+
+    const handleChangeStatus = (id, accept) => {
+        const data = {
+            id: id,
+            status: accept
+        }
+        axios.patch(`${ApiURL}/entries/${id}/`, data);
+        toast.success('Zmieniono status zgłoszenia!');
+    }
 
     return (
         <>
@@ -36,8 +46,12 @@ export const Applications = () => {
                             <p><a href={application.Youtube_URL}>Youtube</a></p>
                             <p><a href={application.Spotify_URL}>Spotify</a></p>
                             <p>{application.ts}</p>
-                            <FcCheckmark className="icon2"/>
-                            <FcCancel className="icon2"/>
+                            <button type="button" className="btn btn-link p-0" onClick={() => handleChangeStatus(application.id, 1)}>
+                                <FcCheckmark className="icon"/>
+                            </button>
+                            <button type="button" className="btn btn-link p-0" onClick={() => handleChangeStatus(application.id, 0)}>
+                                <FcCancel className="icon"/>
+                            </button>
                         </li>
                     ))
                 ) : (

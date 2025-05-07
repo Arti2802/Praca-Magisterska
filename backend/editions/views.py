@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Edition, UserInEdition
 from users.models import UserInContest
-from .serializers import EditionSerializer
+from .serializers import EditionSerializer, EditionReprSerializer
 
 # Create your views here.
 
@@ -22,7 +22,7 @@ class EditionDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class EditionsInContest(generics.ListCreateAPIView):
     name = "editions-in-contest"
-    serializer_class = EditionSerializer
+    serializer_class = EditionReprSerializer
     filterset_fields = ['actual']
     ordering_fields = ['count']
 
@@ -32,7 +32,7 @@ class EditionsInContest(generics.ListCreateAPIView):
 
 class UsersEditions(generics.ListAPIView):
     name = "users-editions"
-    serializer_class = EditionSerializer
+    serializer_class = EditionReprSerializer
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')
@@ -42,7 +42,7 @@ class UsersEditions(generics.ListAPIView):
 
 class UsersContestsEditions(generics.ListAPIView):
     name = "users-contests-editions"
-    serializer_class = EditionSerializer
+    serializer_class = EditionReprSerializer
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')

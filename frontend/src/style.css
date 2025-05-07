@@ -102,28 +102,28 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    }
-    .rejestracja .div {
+}
+.rejestracja .div {
     background-color: #ffffff;
     height: 1024px;
     position: relative;
     width: 1440px;
-    }
-    .rejestracja .overlap-group {
+}
+.rejestracja .overlap-group {
     height: 532px;
     left: 515px;
     position: absolute;
     top: 199px;
     width: 362px;
-    }
-    .rejestracja .group {
+}
+.rejestracja .group {
     height: 532px;
     left: 0;
     position: absolute;
     top: 0;
     width: 362px;
-    }
-    .rejestracja .input {
+}
+.rejestracja .input {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -132,8 +132,8 @@
     position: absolute;
     top: 0;
     width: 360px;
-    }
-    .rejestracja .text-wrapper {
+}
+.rejestracja .text-wrapper {
     align-self: stretch;
     color: #51515b;
     font-family: "Inter-Regular", Helvetica;
@@ -143,8 +143,8 @@
     line-height: 22.5px;
     margin-top: -1px;
     position: relative;
-    }
-    .rejestracja .text-field {
+}
+.rejestracja .text-field {
     align-self: stretch;
     background-color: #ffffff;
     border: 2px solid;
@@ -153,8 +153,8 @@
     flex: 0 0 auto;
     position: relative;
     width: 100%;
-    }
-    .rejestracja .input-2 {
+}
+.rejestracja .input-2 {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -163,8 +163,8 @@
     position: absolute;
     top: 120px;
     width: 360px;
-    }
-    .rejestracja .email {
+}
+.rejestracja .email {
     align-self: stretch;
     background: transparent;
     border: none;
@@ -177,8 +177,8 @@
     margin-top: -1px;
     padding: 0;
     position: relative;
-    }
-    .rejestracja .input-3 {
+}
+.rejestracja .input-3 {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -187,8 +187,8 @@
     position: absolute;
     top: 240px;
     width: 360px;
-    }
-    .rejestracja .primary-button {
+}
+.rejestracja .primary-button {
     align-items: center;
     background-color: #0d398e;
     border-radius: 5px;
@@ -201,8 +201,8 @@
     position: absolute;
     top: 438px;
     width: 320px;
-    }
-    .rejestracja .text-wrapper-2 {
+}
+.rejestracja .text-wrapper-2 {
     color: #ffffff;
     font-family: "Inter-Bold", Helvetica;
     font-size: 32px;
@@ -211,8 +211,8 @@
     line-height: normal;
     position: relative;
     width: fit-content;
-    }
-    .rejestracja .text-wrapper-3 {
+}
+.rejestracja .text-wrapper-3 {
     color: #51515b;
     font-family: "Inter-Regular", Helvetica;
     font-size: 15px;
@@ -223,16 +223,16 @@
     position: absolute;
     top: 347px;
     width: 360px;
-    }
-    .rejestracja .radio-with-label {
+}
+.rejestracja .radio-with-label {
     align-items: center;
     display: inline-flex;
     gap: 6px;
     left: 49px;
     position: absolute;
     top: 392px;
-    }
-    .rejestracja .radio {
+}
+.rejestracja .radio {
     background-color: #ffffff;
     border: 3px solid;
     border-color: #5470ff;
@@ -241,8 +241,8 @@
     height: 20px;
     position: relative;
     width: 20px;
-    }
-    .rejestracja .text-wrapper-4 {
+}
+.rejestracja .text-wrapper-4 {
     color: #000000;
     font-family: "Inter-Regular", Helvetica;
     font-size: 15px;
@@ -253,16 +253,16 @@
     position: relative;
     white-space: nowrap;
     width: fit-content;
-    }
-    .rejestracja .radio-with-label-2 {
+}
+.rejestracja .radio-with-label-2 {
     align-items: center;
     display: inline-flex;
     gap: 6px;
     left: 180px;
     position: absolute;
     top: 392px;
-    }
-    .rejestracja .radio-2 {
+}
+.rejestracja .radio-2 {
     background-color: #ffffff;
     border: 1px solid;
     border-color: #d9d9d9;
@@ -271,8 +271,8 @@
     height: 20px;
     position: relative;
     width: 20px;
-    }
-    .rejestracja .p {
+}
+.rejestracja .p {
     color: #000000;
     font-family: "Inter-Regular", Helvetica;
     font-size: 12px;
@@ -284,32 +284,47 @@
     text-align: center;
     top: 762px;
     width: 378px;
-    }
+}
 
-    .hovered:hover {
-        filter: brightness(90%);
-    }
+.hovered:hover {
+    filter: brightness(90%);
+}
 
-    .icon {
-        height: 30px;
-        width: 30px;
-    }
+.icon {
+    height: 30px;
+    width: 30px;
+}
 
-    .white {
-        color: #ffffff;
-    }
+.white {
+    color: #ffffff;
+}
 
-    .red {
-        color: #ff0000;
-    } 
+.red {
+    color: #ff0000;
+} 
 
-    .sort {
-        height: 30px;
-        width: 30px;
-        color: #000000;
-    }
+.green {
+    color: #00ff00;
+}
 
-    .icon {
-        height: 30px;
-        width: 30px;
-    }
+.sort {
+    height: 30px;
+    width: 30px;
+    color: #000000;
+}
+
+.icon {
+    height: 30px;
+    width: 30px;
+}
+
+.channel {
+    height: 180px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.message {
+    height: 200px;
+}

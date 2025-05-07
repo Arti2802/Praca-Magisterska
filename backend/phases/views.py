@@ -70,6 +70,7 @@ class FinalsInContest(generics.ListAPIView):
 class SemifinalsInEdition(generics.ListAPIView):
     name = "phases-in-edition"
     serializer_class = SemifinalSerializer
+    ordering = ['count']
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')

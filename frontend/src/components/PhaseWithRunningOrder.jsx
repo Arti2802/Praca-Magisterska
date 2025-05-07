@@ -9,7 +9,7 @@ export const PhaseWithRunningOrder = ({id}) => {
 
     useEffect(() => {
         if (id) {
-            axios.get(`${ApiURL}/phases/${id}/entries`)
+            axios.get(`${ApiURL}/phases/${id}/running-order/`)
         .then(response => {
             console.log(response);
             setEntries(response.data);
@@ -30,19 +30,18 @@ export const PhaseWithRunningOrder = ({id}) => {
 
     return (
         <>
-            <ul>
+            <div className="accordion-body">
                 {entries.length > 0 ? (
                     entries.map((entry) => (
-                        <li key={entry.id}>
+                        <p key={entry.id}>
                             {entry.running_order}. <ReactCountryFlag countryCode={entry.entry.country?.country.code} style={{width: '3em', height: '3em'}} svg/> 
                             {entry.entry?.artist} - {entry.entry?.title}
-                            {console.log("to", entry)}
-                        </li>
+                        </p>
                     ))
                 ) : (
-                    <li>Kolejność występów nie jest jeszcze znana</li>
+                    <strong>Kolejność występów nie jest jeszcze znana</strong>
                 )}
-            </ul>
+            </div>
         </>
     );
 }

@@ -1,14 +1,17 @@
-import {DndContext, closestCenter,
+import {
+    DndContext, 
+    closestCenter,
     KeyboardSensor,
     PointerSensor,
     useSensor,
-    useSensors,} from '@dnd-kit/core';
+    useSensors,
+} from '@dnd-kit/core';
 import {
     arrayMove,
     SortableContext,
     sortableKeyboardCoordinates,
     verticalListSortingStrategy,
-    } from '@dnd-kit/sortable';
+} from '@dnd-kit/sortable';
 
 export const SortableList = ({items, setItems, children}) => {
     const sensors = useSensors(

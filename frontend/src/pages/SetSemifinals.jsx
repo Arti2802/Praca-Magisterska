@@ -7,6 +7,7 @@ import ApiURL from "../ApiURL";
 import { UnderlineNav } from "../components/UnderlineNav";
 import { ConfirmButton } from "../components/ConfirmButton";
 import { CountryRepresentation } from "../components/CountryRepresentation";
+import toast from "react-hot-toast";
 
 export const SetSemifinals = () => {
     const { id2 } = useParams();
@@ -31,25 +32,50 @@ export const SetSemifinals = () => {
         })
     }, [id2])
 
-    // const handleChange = (e) => {
-    //     const value = e.target.value;
-    //     setData({
-    //         ...data,
-    //         [e.target.name]: value
-    //     });
-    // };
+    let numbers = entries.map(() => 1);
+
+    const handleChange = (e, index) => {
+        numbers[index] = parseInt(e.target.value);
+        console.log(numbers);
+    };
+
+    const handleAdd = async(e) => {
+        e.preventDefault();
+        try {
+            const data = entries.map((entry, index) => ({
+                entry: entry.id,
+                semifinal: numbers.at(index)
+            }));
+            console.log(data);
+            const response = await axios.post(`${ApiURL}/semifinals/2/entries/`, data);
+            if (response.status === '201')
+                toast.error("Udało się!");
+        } catch (err) {
+            console.log(err);
+            if (!err.response) {
+                toast.error('Brak odpowiedzi od serwera');
+            } else if (err.response?.status === 400){
+                toast.error("Coś poszło nie tak");
+            } else if (err.response?.status === 401){
+                toast.error('Brak autoryzacji');
+            } else {
+                toast.error('Coś poszło nie tak');
+            }
+        }
+    }
+
 
     return (
         <>
             <h1>Przydziel piosenki do półfinałów</h1>
             <UnderlineNav page={"ustal-polfinaly"} link_idx={1}/>
-            <div>
+            <form onSubmit={handleAdd}>
                 {entries.length > 0 ? (
-                    entries.map((entry) => (
+                    entries.map((entry, index) => (
                         <div key={entry.id}>
                             <CountryRepresentation country={entry.country.country}/>
                             <span> {entry.artist} - {entry.title}</span>
-                            <select defaultValue={0}>
+                            <select defaultValue={0} onChange={(e) =>handleChange(e, index)}>
                                 <option value={0} disabled>Wybierz półfinał</option>
                                 {semifinals.length > 0 ? (
                                     semifinals.map((semifinal) => (
@@ -60,10 +86,10 @@ export const SetSemifinals = () => {
                         </div>
                     ))
                 ) : (
-                    <li>Brak państw</li>
+                    <p>Brak państw</p>
                 )}
-            </div>
-            <ConfirmButton label={"Zatwierdź"}/>
+                <ConfirmButton label={"Zatwierdź"}/>
+            </form>
         </>
     );
 }

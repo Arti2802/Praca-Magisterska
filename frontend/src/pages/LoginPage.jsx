@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import ApiURL from "../ApiURL";
-//import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import { InputGroup } from "../components/InputGroup";
 //import { Loading } from "../components/Loading";
 
@@ -13,11 +13,13 @@ export const LoginPage = () => {
     //const [errMsg, setErrMsg] = useState("");
     const [data, setData] = useState({});
     // const [loading, setLoading] = useState(false);
+    
     useEffect(() => {
         if (sessionStorage.getItem('isLogged') === "true") {
           navigate("/"); 
         }
     }, [navigate]);
+
     const handleChange = (e) => {
         const value = e.target.value;
         setData({
@@ -25,6 +27,7 @@ export const LoginPage = () => {
             [e.target.name]: value
         });
     };
+
     const handleLogin = async(e) => {
         e.preventDefault();
         //setLoading(true);
@@ -34,6 +37,10 @@ export const LoginPage = () => {
                 password: data.password,
             }
             console.log(Userdata);
+            setData({
+                username: '',
+                password: ''
+            });
             const response = await axios.post(`${ApiURL}/login/`, Userdata);
             console.log(response);
            if (response.status === 200) 
@@ -49,17 +56,18 @@ export const LoginPage = () => {
             }
             else
             {
-                alert('Błędne dane logowania');
+                toast.error('Błędne dane logowania');
+                console.log(data);
             }
         } catch (err) {
             if (!err.response) {
-                alert('Brak odpowiedzi od serwera');
+                toast.error('Brak odpowiedzi od serwera');
             } else if (err.response?.status === 400){
-                alert('Błedne dane logowania');
+                toast.error('Błędne dane logowania');
             } else if (err.response?.status === 401){
-                alert('Brak autoryzacji');
+                toast.error('Brak autoryzacji');
             } else {
-                alert('Logowanie nie powiodło się');
+                toast.error('Logowanie nie powiodło się');
             }
             console.log(err);
             //setLoading(false);
@@ -73,9 +81,11 @@ export const LoginPage = () => {
                     <InputGroup label={"Nazwa użytkownika"} name={"username"} value={data.username} onChange={handleChange}/>
                     <InputGroup label={"Hasło"} type={"password"} name={"password"} value={data.password} onChange={handleChange}/> 
                     <div className="mb-3">
-                    <button className="btn btn-primary w-100" type="submit">Zaloguj się</button>
+                        <button className="btn btn-primary w-100" type="submit">Zaloguj się</button>
                     </div>
-                    <div className="text-center"><a href={"/rejestracja"}>Nie masz konta? Zarejestruj się</a></div>
+                    <div className="text-center">
+                        <a href="/rejestracja">Nie masz konta? Zarejestruj się</a>
+                    </div>
                 </form>
             </main>
         </div>

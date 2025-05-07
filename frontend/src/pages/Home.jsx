@@ -17,11 +17,11 @@ export const Home = () => {
     }, [])
     return (
         <>
-            <form>
-                <a href="/dodaj-konkurs"><button className="btn btn-primary" type="button">Stwórz konkurs</button></a>
-            </form>
-            <h1>Konkursy</h1>
-
+            <div className="mb-2">
+                <a className="btn btn-primary mx-1" href="/dodaj-konkurs">Stwórz konkurs</a>
+                <a className="btn btn-primary" href="/konkursy">Przeglądaj konkursy</a>
+            </div>
+            <h1 className="mb-3">Konkursy</h1>
             <div className="container">
                 <div className="row row-cols-3 gx-6 row-gap-3">
                     {contests.map((contest) => (
